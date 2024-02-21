@@ -16,9 +16,13 @@ Feel free to reach out to me if you have any questions or suggestions regarding 
 
 To get started with the application, follow the steps below:
 
-1. Clone the repository: `git clone [repository URL]`
-2. Install the dependencies: `npm install`
-3. Start the development server: `npm start`
+1. Clone the repository: `git clone https://github.com/Akon2020/employeMag.git`
+2. Enter in the frontend folder `cd employeMag`
+3. Install the dependencies: `npm install`
+4. Start the development server: `npm run dev`
+5. Go back and enter in the backend folder `cd ..` and `cd Serveur`
+6. Install the dependencies: `npm install`
+7. Start the development server: `npm start`
 
 ## Features
 
