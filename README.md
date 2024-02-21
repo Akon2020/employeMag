@@ -4,8 +4,8 @@ This repository contains a full-stack employee management application. The front
 
 ## Author
 
-- Author: Akonkwa Ushindi Isaac
-- Email: [akonkwaushindi@gmail.com](akonkwaushindi@gmail.com)
+- Author: Akonkwa Ushindi Isaac and Ulysse Jun
+- Email: [akonkwaushindi@gmail.com](akonkwaushindi@gmail.com) and [ulyssejun70@gmail.com](ulyssejun70@gmail.com)
 - LinkedIn: [https://linkedin.com/in/akonizk](https://linkedin.com/in/akonizk)
 - Facebook: [https://facebook.com/Akonkwa.Ushindi](https://facebook.com/Akonkwa.Ushindi)
 - Google Developper: [https://g.dev/akon1703](https://g.dev/akon1703)
