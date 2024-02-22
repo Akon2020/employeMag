@@ -65,7 +65,8 @@ const upload = multer({
   storage: storage,
 }); */
 
-router.post("/ajout_employe", (req, res) => { // , upload.single("image")
+router.post("/ajout_employe", (req, res) => {
+  // , upload.single("image")
   const sql = `INSERT INTO employes (nom, email, password, adresse, salaire, profil, idCategorie) VALUES (?)`;
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     if (err) {
@@ -86,6 +87,16 @@ router.post("/ajout_employe", (req, res) => { // , upload.single("image")
       }
       return res.json({ Status: true });
     });
+  });
+});
+
+router.get("/employes", (req, res) => {
+  const sql = "SELECT * FROM employes ORDER BY nom";
+  con.query(sql, (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    return res.json({ Status: true, Result: result });
   });
 });
 
