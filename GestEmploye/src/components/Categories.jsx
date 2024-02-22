@@ -13,6 +13,7 @@ const Categories = () => {
           setCategories(result.data.Result);
         } else {
           alert(result.data.Error);
+          prompt("Vous êtes jolie?")
         }
       })
       .catch((err) => console.log(err));
