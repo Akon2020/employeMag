@@ -9,6 +9,7 @@ import Profiles from './components/Profiles'
 import Employes from './components/Employes'
 import AjoutCategorie from './components/AjoutCategorie'
 import AjoutEmploye from './AjoutEmploye'
+import EditEmploye from './components/EditEmploye'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path='/admin/dashboard/profiles' element={<Profiles/>} />
           <Route path='/admin/dashboard/ajout_categorie' element={<AjoutCategorie/>} />
           <Route path='/admin/dashboard/ajout_employe' element={<AjoutEmploye/>} />
+          <Route path='/admin/dashboard/edit_employe/:id' element={<EditEmploye/>} />
         </Route>
       </Routes>
     </BrowserRouter>

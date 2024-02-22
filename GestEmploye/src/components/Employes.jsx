@@ -55,9 +55,9 @@ const Employes = () => {
                   <td>{pers.adresse}</td>
                   <td>{pers.salaire}$</td>
                   <td>
-                    <button className="btn btn-primary btn-sm me-3">
+                    <Link to={`/admin/dashboard/edit_employe/`+pers.id} className="btn btn-primary btn-sm me-3">
                       Modifier
-                    </button>
+                    </Link>
                     <button className="btn btn-danger btn-sm">Supprimer</button>
                   </td>
                 </tr>
