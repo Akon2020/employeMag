@@ -2,8 +2,10 @@
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AjoutEmploye = () => {
+  const navigate = useNavigate();
   const [categories, setCategories] = useState();
   const [employe, setEmploye] = useState({
     nom: "",
@@ -14,23 +16,38 @@ const AjoutEmploye = () => {
     idCategorie: "",
     profil: "",
   });
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/auth/categories")
       .then((result) => {
-        if (result.data.Status) {
+        if (result.data && result.data.Status) {
           setCategories(result.data.Result);
         } else {
-          alert(result.data.Error);
+          alert(result.data && result.data.Error);
         }
       })
       .catch((err) => console.log(err));
   }, []);
   const ajoutEmployes = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("nom", employe.nom);
+    formData.append("email", employe.email);
+    formData.append("password", employe.password);
+    formData.append("salaire", employe.salaire);
+    formData.append("adresse", employe.adresse);
+    formData.append("idCategorie", employe.idCategorie);
+    formData.append("profil", employe.profil);
     axios
-      .post("http://localhost:3000/auth/ajout_employe", employe)
-      .then((result) => console.log(result.data))
+      .post("http://localhost:3000/auth/ajout_employe", formData)
+      .then((result) => {
+        if (result.data.Status) {
+          navigate("/admin/dashboard/employes");
+        } else {
+          alert(result.data.Error);
+        }
+      })
       .catch((err) => console.log(err));
   };
   return (
@@ -133,6 +150,7 @@ const AjoutEmploye = () => {
             <input
               type="file"
               id="inputProfil"
+              name="image"
               className="form-control rounded-0"
               onChange={(e) =>
                 setEmploye({ ...employe, profil: e.target.files[0] })

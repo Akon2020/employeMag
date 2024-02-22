@@ -1,7 +1,9 @@
 import express from "express";
 import con from "../utils/db.js";
 import jwt from "jsonwebtoken";
-import bcrypt, { compareSync, hash } from "bcrypt";
+import bcrypt from "bcrypt";
+import multer from "multer";
+import path from "path";
 
 const router = express.Router();
 router.post("/adminlogin", (req, res) => {
@@ -48,9 +50,23 @@ router.post("/ajout_categorie", (req, res) => {
   });
 });
 
-router.post("/ajout_employe", (req, res) => {
-  const sql =
-    `INSERT INTO employes (nom, email, password, adresse, salaire, profil, idCategorie) VALUES (?)`;
+const storage = multer.diskStorage({
+  destination: (req, file, callbackFunc) => {
+    callbackFunc(null, "public/images");
+  },
+  filename: (req, file, cb) => {
+    cb(
+      null,
+      file.fieldname + "_" + Date.now() + path.extname(file.originalname)
+    );
+  },
+});
+const upload = multer({
+  storage: storage,
+});
+
+router.post("/ajout_employe", upload.single("image"), (req, res) => {
+  const sql = `INSERT INTO employes (nom, email, password, adresse, salaire, profil, idCategorie) VALUES (?)`;
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     if (err) {
       return res.json({ Status: false, Error: "Query error" });
@@ -61,12 +77,12 @@ router.post("/ajout_employe", (req, res) => {
       hash,
       req.body.adresse,
       req.body.salaire,
-      req.body.profil,
+      req.file.filename,
       req.body.idCategorie,
     ];
     con.query(sql, [valeur], (err, result) => {
       if (err) {
-        return res.json({ Status: false, Error: "Query error" });
+        return res.json({ Status: false, Error: err.message });
       }
       return res.json({ Status: true });
     });
