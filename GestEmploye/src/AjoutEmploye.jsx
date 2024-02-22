@@ -11,7 +11,7 @@ const AjoutEmploye = () => {
     password: "",
     salaire: "",
     adresse: "",
-    categorie: "",
+    idCategorie: "",
     profil: "",
   });
   useEffect(() => {
@@ -26,19 +26,13 @@ const AjoutEmploye = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-const ajoutEmployes = (e) => {
+  const ajoutEmployes = (e) => {
     e.preventDefault();
     axios
       .post("http://localhost:3000/auth/ajout_employe", employe)
-      .then((result) => {
-        if (result.data.Status) {
-          alert("Employé ajouté avec succès");
-        } else {
-          alert(result.data.Error);
-        }
-      })
+      .then((result) => console.log(result.data))
       .catch((err) => console.log(err));
-};
+  };
   return (
     <div className="d-flex justify-content-center align-items-center mt-3">
       <div className="p-3 rounded w-50 border">
@@ -76,8 +70,8 @@ const ajoutEmployes = (e) => {
               Mot de passe
             </label>
             <input
-              type="email"
-              id="inputEmail"
+              type="password"
+              id="inputPassword"
               className="form-control rounded-0"
               placeholder="Entrez le mot de passe choisi par l'employé"
               onChange={(e) =>
@@ -121,7 +115,7 @@ const ajoutEmployes = (e) => {
               id="categorie"
               className="form-select"
               onChange={(e) =>
-                setEmploye({ ...employe, categorie: e.target.value })
+                setEmploye({ ...employe, idCategorie: e.target.value })
               }
             >
               {categories &&

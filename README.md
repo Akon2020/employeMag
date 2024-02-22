@@ -20,7 +20,7 @@ To get started with the application, follow the steps below:
 2. Enter in the frontend folder `cd employeMag`
 3. Install the dependencies: `npm install`
 4. Start the development server: `npm run dev`
-5. Go back and enter in the backend folder `cd ..` and `cd Serveur`
+5. Go back and enter in the backend folder `cd ..` and `cd Server`
 6. Install the dependencies: `npm install`
 7. Start the development server: `npm start`
 

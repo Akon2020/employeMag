@@ -1,7 +1,7 @@
 import express from "express";
 import con from "../utils/db.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import bcrypt, { compareSync, hash } from "bcrypt";
 
 const router = express.Router();
 router.post("/adminlogin", (req, res) => {
@@ -50,28 +50,27 @@ router.post("/ajout_categorie", (req, res) => {
 
 router.post("/ajout_employe", (req, res) => {
   const sql =
-    "INSERT INTO employes (`nom`, `email`, `password`, `salaire`, `adresse`, `categorie`, `profil`) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    bcrypt.hash(req.body.password, 10, (err, hash) => {
+    `INSERT INTO employes (nom, email, password, adresse, salaire, profil, idCategorie) VALUES (?)`;
+  bcrypt.hash(req.body.password, 10, (err, hash) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    const valeur = [
+      req.body.nom,
+      req.body.email,
+      hash,
+      req.body.adresse,
+      req.body.salaire,
+      req.body.profil,
+      req.body.idCategorie,
+    ];
+    con.query(sql, [valeur], (err, result) => {
       if (err) {
         return res.json({ Status: false, Error: "Query error" });
-        const valeur = [
-          req.body.nom,
-          req.body.email,
-          hash,
-          req.body.salaire,
-          req.body.adresse,
-          req.body.profil,
-          req.body.idCategorie,
-        ]
-        con.query(sql, [valeur], (err, result) => {
-          if (err) {
-            return res.json({ Status: false, Error: "Query error" });
-          }
-          return res.json({ Status: true });
-        });
       }
+      return res.json({ Status: true });
+    });
   });
-  
 });
 
 export { router as adminRouter };
