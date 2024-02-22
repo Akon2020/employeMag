@@ -50,7 +50,7 @@ router.post("/ajout_categorie", (req, res) => {
   });
 });
 
-const storage = multer.diskStorage({
+/* const storage = multer.diskStorage({
   destination: (req, file, callbackFunc) => {
     callbackFunc(null, "public/images");
   },
@@ -63,9 +63,9 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage: storage,
-});
+}); */
 
-router.post("/ajout_employe", upload.single("image"), (req, res) => {
+router.post("/ajout_employe", (req, res) => { // , upload.single("image")
   const sql = `INSERT INTO employes (nom, email, password, adresse, salaire, profil, idCategorie) VALUES (?)`;
   bcrypt.hash(req.body.password, 10, (err, hash) => {
     if (err) {
@@ -77,7 +77,7 @@ router.post("/ajout_employe", upload.single("image"), (req, res) => {
       hash,
       req.body.adresse,
       req.body.salaire,
-      req.file.filename,
+      req.body.profil, // req.file.filename,
       req.body.idCategorie,
     ];
     con.query(sql, [valeur], (err, result) => {

@@ -40,7 +40,7 @@ const AjoutEmploye = () => {
     formData.append("idCategorie", employe.idCategorie);
     formData.append("profil", employe.profil);
     axios
-      .post("http://localhost:3000/auth/ajout_employe", formData)
+      .post("http://localhost:3000/auth/ajout_employe", employe)
       .then((result) => {
         if (result.data.Status) {
           navigate("/admin/dashboard/employes");
