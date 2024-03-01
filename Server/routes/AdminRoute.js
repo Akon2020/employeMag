@@ -137,4 +137,24 @@ router.delete("/supprimer_employe/:id", (req, res) => {
   });
 });
 
+router.get("/total_admin", (req, res) => {
+  const sql = "SELECT COUNT(id) as admin FROM admin";
+  con.query(sql, (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
+router.get("/total_employe", (req, res) => {
+  const sql = "SELECT COUNT(id) as employe FROM employes";
+  con.query(sql, (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
 export { router as adminRouter };
