@@ -177,4 +177,9 @@ router.get("/liste_admin", (req, res) => {
   });
 });
 
+router.get("/logout", (req, res) => {
+  res.clearCookie("token");
+  return res.json({ Status: true });
+});
+
 export { router as adminRouter };

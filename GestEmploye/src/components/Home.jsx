@@ -76,7 +76,7 @@ const Home = () => {
           <hr />
           <div className="d-flex justify-content-between">
             <h5>Total:</h5>
-            <h5>{totalSalaire}</h5>
+            <h5>{totalSalaire} $</h5>
           </div>
         </div>
       </div>
