@@ -157,4 +157,24 @@ router.get("/total_employe", (req, res) => {
   });
 });
 
+router.get("/total_salaire", (req, res) => {
+  const sql = "SELECT SUM(salaire) as salaire FROM employes";
+  con.query(sql, (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
+router.get("/liste_admin", (req, res) => {
+  const sql = "SELECT * FROM admin";
+  con.query(sql, (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
 export { router as adminRouter };

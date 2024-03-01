@@ -1,13 +1,13 @@
 // import React from 'react'
 import { useEffect, useState } from "react";
 import axios from "axios";
-import con from "../../../Server/utils/db";
 
 const Home = () => {
-  const [totalAdmin, setTotalAdmin] = useState();
-  const [totalEmploye, setTotalEmploye] = useState();
-  const [totalSalaire, setTotalSalaire] = useState();
-  useEffect(() => {
+  const [totalAdmin, setTotalAdmin] = useState(0);
+  const [totalEmploye, setTotalEmploye] = useState(0);
+  const [totalSalaire, setTotalSalaire] = useState(0);
+  const [listeAdmin, setListeAdmin] = useState([]);
+  /* useEffect(() => {
     nbrAdmin();
   }, []);
   const nbrAdmin = () => {
@@ -19,27 +19,33 @@ const Home = () => {
         }
       })
       .catch((err) => console.log(err));
-  };
-  /* useEffect(() => {
+  }; */
+  useEffect(() => {
     axios
       .get("http://localhost:3000/auth/total_admin")
       .then((result) => {
-        setTotalAdmin(result.data.Result[0].total);
+        setTotalAdmin(result.data.Result[0].admin);
       })
       .catch((err) => console.log(err));
     axios
       .get("http://localhost:3000/auth/total_employe")
       .then((result) => {
-        setTotalEmploye(result.data.Result[0].total);
+        setTotalEmploye(result.data.Result[0].employe);
       })
       .catch((err) => console.log(err));
     axios
       .get("http://localhost:3000/auth/total_salaire")
       .then((result) => {
-        setTotalSalaire(result.data.Result[0].total);
+        setTotalSalaire(result.data.Result[0].salaire);
       })
       .catch((err) => console.log(err));
-  }, []); */
+    axios
+      .get("http://localhost:3000/auth/liste_admin")
+      .then((result) => {
+        setListeAdmin(result.data.Result);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <div>
       <div className="p-3 d-flex justify-content-around mt-3">
@@ -73,6 +79,30 @@ const Home = () => {
             <h5>{totalSalaire}</h5>
           </div>
         </div>
+      </div>
+      <div className="mt-4 px-5 pt-3">
+        <h3>Liste des Administrateurs</h3>
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {listeAdmin.map((admin) => (
+              <tr key={admin.id}>
+                <td>{admin.email}</td>
+                <td>
+                  <button className="btn btn-primary btn-sm me-4">
+                    Modifier
+                  </button>
+                  <button className="btn btn-danger btn-sm">Supprimer</button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
