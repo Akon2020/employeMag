@@ -37,10 +37,11 @@ const EditEmploye = () => {
           email: result.data.Result[0].email,
           salaire: result.data.Result[0].salaire,
           adresse: result.data.Result[0].adresse,
-          //   idCategorie: result.data.Result[0].idCategorie,
+          idCategorie: result.data.Result[0].idCategorie,
         });
       })
       .catch((err) => console.log(err));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const modifierEmploye = (e) => {
     e.preventDefault();
@@ -53,6 +54,7 @@ const EditEmploye = () => {
         } else {
           alert(result.data.Error);
         }
+        console.log(result.data);
       })
       .catch((err) => console.log(err));
   };

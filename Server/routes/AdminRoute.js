@@ -111,20 +111,29 @@ router.get("/employe/:id", (req, res) => {
 });
 
 router.put("/edit_employe/:id", (req, res) => {
-  const sql = `UPDATE employes SET nom = ?, email = ?, adresse = ?, salaire = ?, profil = ?, idCategorie = ? WHERE id = ?`;
+  const sql = `UPDATE employes SET nom = ?, email = ?, salaire = ?, adresse = ?, idCategorie = ? WHERE id = ?`;
   const valeur = [
     req.body.nom,
     req.body.email,
-    req.body.adresse,
     req.body.salaire,
+    req.body.adresse,
     req.body.idCategorie,
-    req.params.id,
   ];
-  con.query(sql, valeur, (err, result) => {
+  con.query(sql, [...valeur, req.params.id], (err, result) => {
     if (err) {
       return res.json({ Status: false, Error: "Query error" });
     }
-    return res.json({ Status: true });
+    return res.json({ Status: true, Result: result });
+  });
+});
+
+router.delete("/supprimer_employe/:id", (req, res) => {
+  const sql = `DELETE FROM employes WHERE id = ?`;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" + err });
+    }
+    return res.json({ Status: true, Result: result });
   });
 });
 
