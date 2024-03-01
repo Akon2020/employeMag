@@ -18,6 +18,9 @@ const Login = () => {
           navigate("/admin/dashboard");
         } else {
           setError(result.data.Error);
+          setTimeout(() => {
+            setError(null);
+          }, 1700);
         }
       })
       .catch((err) => console.log(err));
