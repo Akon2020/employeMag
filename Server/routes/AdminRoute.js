@@ -177,6 +177,17 @@ router.get("/liste_admin", (req, res) => {
   });
 });
 
+router.post("/ajout_admin", (req, res) => {
+  const sql = `INSERT INTO admin (email, password) VALUES (?)`;
+  const infoValeur = [req.body.email, req.body.password];
+  con.query(sql, [infoValeur], (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" + err });
+    }
+    return res.json({ Status: true });
+  });
+});
+
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
   return res.json({ Status: true });

@@ -1,12 +1,14 @@
 // import React from 'react'
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [totalAdmin, setTotalAdmin] = useState(0);
   const [totalEmploye, setTotalEmploye] = useState(0);
   const [totalSalaire, setTotalSalaire] = useState(0);
   const [listeAdmin, setListeAdmin] = useState([]);
+  
   /* useEffect(() => {
     nbrAdmin();
   }, []);
@@ -46,6 +48,7 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+
   return (
     <div>
       <div className="p-3 d-flex justify-content-around mt-3">
@@ -81,7 +84,15 @@ const Home = () => {
         </div>
       </div>
       <div className="mt-4 px-5 pt-3">
-        <h3>Liste des Administrateurs</h3>
+        <div className="d-flex justify-content-between">
+          <h3>Liste des Administrateurs</h3>
+          <Link
+            to={"/admin/dashboard/ajout_admin"}
+            className="btn btn-success"
+          >
+            Ajouter un administrateur
+          </Link>
+        </div>
         <table className="table">
           <thead>
             <tr>
