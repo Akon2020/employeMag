@@ -8,7 +8,7 @@ const Home = () => {
   const [totalEmploye, setTotalEmploye] = useState(0);
   const [totalSalaire, setTotalSalaire] = useState(0);
   const [listeAdmin, setListeAdmin] = useState([]);
-  
+
   /* useEffect(() => {
     nbrAdmin();
   }, []);
@@ -48,6 +48,17 @@ const Home = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+  const supprimerAdmin = (id) => {
+    axios
+      .delete("http://localhost:3000/auth/supprimer_admin/" + id)
+      .then((result) => {
+        if (result.data.Status) {
+          window.location.reload();
+        } else {
+          alert(result.data.Error);
+        }
+      });
+  };
 
   return (
     <div>
@@ -86,10 +97,7 @@ const Home = () => {
       <div className="mt-4 px-5 pt-3">
         <div className="d-flex justify-content-between">
           <h3>Liste des Administrateurs</h3>
-          <Link
-            to={"/admin/dashboard/ajout_admin"}
-            className="btn btn-success"
-          >
+          <Link to={"/admin/dashboard/ajout_admin"} className="btn btn-success">
             Ajouter un administrateur
           </Link>
         </div>
@@ -105,10 +113,12 @@ const Home = () => {
               <tr key={admin.id}>
                 <td>{admin.email}</td>
                 <td>
-                  <button className="btn btn-primary btn-sm me-4">
-                    Modifier
+                  <button
+                    className="btn btn-danger btn-sm"
+                    onClick={() => supprimerAdmin(admin.id)}
+                  >
+                    Supprimer
                   </button>
-                  <button className="btn btn-danger btn-sm">Supprimer</button>
                 </td>
               </tr>
             ))}

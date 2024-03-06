@@ -28,14 +28,43 @@ const Employes = () => {
         }
       });
   };
+  const chercher = (nom) => {
+    axios
+      .get("http://localhost:3000/auth/employes",  nom)
+      .then((result) => {
+        if (result.data.Status) {
+          console.log(result.data);
+        } else {
+          alert(result.data.Error);
+        }
+      });
+  };
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
         <h3>Liste des Employés</h3>
       </div>
-      <Link to={"/admin/dashboard/ajout_employe"} className="btn btn-success">
-        Ajouter un employé
-      </Link>
+      <div className="d-flex justify-content-between">
+        <Link to={"/admin/dashboard/ajout_employe"} className="btn btn-success">
+          Ajouter un employé
+        </Link>
+        <div className="d-flex justify-content-center gap-4">
+          <input
+            type="search"
+            name="search"
+            id="search"
+            className="form-control rounded"
+            placeholder="Rechercher un employé"
+          />
+          <button
+            className="btn btn-primary btn-sm me-3 rounded"
+            onClick={chercher}
+          >
+            Rechercher
+          </button>
+        </div>
+      </div>
+
       <div className="mt-5">
         <table className="table table-hover">
           {/* table-striped table-hover */}
@@ -49,7 +78,7 @@ const Employes = () => {
               <th>Action</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody id="container">
             {employes &&
               employes.map((pers, i) => (
                 <tr key={i}>

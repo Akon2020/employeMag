@@ -178,13 +178,23 @@ router.get("/liste_admin", (req, res) => {
 });
 
 router.post("/ajout_admin", (req, res) => {
-  const sql = `INSERT INTO admin (email, password) VALUES (?)`;
+  const sql = `INSERT INTO admin (id, email, password) VALUES (NULL, ?, ?)`;
   const infoValeur = [req.body.email, req.body.password];
-  con.query(sql, [infoValeur], (err, result) => {
+  con.query(sql, [...infoValeur], (err, result) => {
     if (err) {
       return res.json({ Status: false, Error: "Query error" + err });
     }
     return res.json({ Status: true });
+  });
+});
+
+router.delete("/supprimer_admin/:id", (req, res) => {
+  const sql = `DELETE FROM admin WHERE id = ?`;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" + err });
+    }
+    return res.json({ Status: true, Result: result });
   });
 });
 

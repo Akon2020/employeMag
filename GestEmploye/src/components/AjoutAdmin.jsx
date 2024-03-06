@@ -21,6 +21,7 @@ const AjoutAdmin = () => {
           navigate("/admin/dashboard");
         } else {
           alert(result.data.Error);
+          console.log(result.data);
         }
       })
       .catch((err) => console.log(err));
