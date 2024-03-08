@@ -17,6 +17,17 @@ const Categories = () => {
       })
       .catch((err) => console.log(err));
   }, []);
+  const supprimerCategorie = (id) => {
+    axios
+      .delete("http://localhost:3000/auth/supprimer_categorie/" + id)
+      .then((result) => {
+        if (result.data.Status) {
+          window.location.reload();
+        } else {
+          alert(result.data.Error);
+        }
+      });
+  };
   return (
     <div className="px-5 mt-3">
       <div className="d-flex justify-content-center">
@@ -43,7 +54,12 @@ const Categories = () => {
                     <button className="btn btn-primary btn-sm me-3">
                       Modifier
                     </button>
-                    <button className="btn btn-danger btn-sm">Supprimer</button>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => supprimerCategorie(categorie.id)}
+                    >
+                      Supprimer
+                    </button>
                   </td>
                 </tr>
               ))}

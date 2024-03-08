@@ -198,6 +198,16 @@ router.delete("/supprimer_admin/:id", (req, res) => {
   });
 });
 
+router.delete("/supprimer_categorie/:id", (req, res) => {
+  const sql = `DELETE FROM categories WHERE id = ?`;
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" + err });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
 router.get("/logout", (req, res) => {
   res.clearCookie("token");
   return res.json({ Status: true });
