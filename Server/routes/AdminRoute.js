@@ -198,11 +198,32 @@ router.delete("/supprimer_admin/:id", (req, res) => {
   });
 });
 
+router.get("/categories/:id", (req, res) => {
+  const sql = "SELECT * FROM categories WHERE id = ?";
+  con.query(sql, [req.params.id], (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
 router.delete("/supprimer_categorie/:id", (req, res) => {
   const sql = `DELETE FROM categories WHERE id = ?`;
   con.query(sql, [req.params.id], (err, result) => {
     if (err) {
       return res.json({ Status: false, Error: "Query error" + err });
+    }
+    return res.json({ Status: true, Result: result });
+  });
+});
+
+router.put("/edit_categorie/:id", (req, res) => {
+  const sql = `UPDATE categories SET nom = ? WHERE id = ?`;
+  // const valeur = [req.body.nom];
+  con.query(sql, [req.body.nom, req.params.id], (err, result) => {
+    if (err) {
+      return res.json({ Status: false, Error: "Query error" });
     }
     return res.json({ Status: true, Result: result });
   });

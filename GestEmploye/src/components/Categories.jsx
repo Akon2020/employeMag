@@ -51,9 +51,12 @@ const Categories = () => {
                 <tr key={i}>
                   <td>{categorie.nom}</td>
                   <td>
-                    <button className="btn btn-primary btn-sm me-3">
+                    <Link
+                      to={`/admin/dashboard/edit_categorie/` + categorie.id}
+                      className="btn btn-primary btn-sm me-3"
+                    >
                       Modifier
-                    </button>
+                    </Link>
                     <button
                       className="btn btn-danger btn-sm"
                       onClick={() => supprimerCategorie(categorie.id)}

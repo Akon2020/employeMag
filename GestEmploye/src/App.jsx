@@ -12,6 +12,7 @@ import AjoutEmploye from "./components/AjoutEmploye";
 import EditEmploye from "./components/EditEmploye";
 import Start from "./components/Start";
 import AjoutAdmin from "./components/AjoutAdmin";
+import EditCategorie from "./components/EditCategorie";
 
 function App() {
   return (
@@ -39,6 +40,10 @@ function App() {
           <Route
             path="/admin/dashboard/ajout_admin"
             element={<AjoutAdmin />}
+          />
+          <Route
+            path="/admin/dashboard/edit_categorie/:id"
+            element={<EditCategorie />}
           />
         </Route>
       </Routes>
