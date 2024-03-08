@@ -30,7 +30,8 @@ const Categories = () => {
           {/* table-striped table-hover */}
           <thead>
             <tr>
-              <th>Nom</th>
+              <th>Intitulé</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +39,12 @@ const Categories = () => {
               categories.map((categorie, i) => (
                 <tr key={i}>
                   <td>{categorie.nom}</td>
+                  <td>
+                    <button className="btn btn-primary btn-sm me-3">
+                      Modifier
+                    </button>
+                    <button className="btn btn-danger btn-sm">Supprimer</button>
+                  </td>
                 </tr>
               ))}
           </tbody>
