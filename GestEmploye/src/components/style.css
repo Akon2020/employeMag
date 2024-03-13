@@ -21,3 +21,8 @@ ul li:hover {
   height: 40px;
   border-radius: 50%;
 }
+@media screen and (max-width: 768px) {
+  .loginForm {
+    width: 80px;
+  }
+}

@@ -225,7 +225,7 @@ router.put("/edit_categorie/:id", (req, res) => {
     if (err) {
       return res.json({ Status: false, Error: "Query error" });
     }
-    return res.json({ Status: true, Result: result });
+    return res.json({ Status: true, Result: result, message: "Catégorie modifié avec succès" });
   });
 });
 

@@ -5,6 +5,7 @@ import axios from "axios";
 
 const EditCategorie = () => {
   const navigate = useNavigate();
+  const [alert, setAlert] = useState(null);
   const [categorie, setCategorie] = useState({
     nom: "",
   });
@@ -27,8 +28,11 @@ const EditCategorie = () => {
       .put("http://localhost:3000/auth/edit_categorie/" + id, categorie)
       .then((result) => {
         if (result.data.Status) {
-          alert("Catégorie modifié avec succès");
-          navigate("/admin/dashboard/categories");
+          setAlert(result.data.message);
+          setTimeout(() => {
+            setAlert(null);
+            navigate("/admin/dashboard/categories");
+          }, 1700);
         } else {
           alert(result.data.Error);
         }
@@ -40,6 +44,11 @@ const EditCategorie = () => {
   return (
     <div className="d-flex justify-content-center align-items-center h-75">
       <div className="p-3 rounded w-30 border">
+        {alert && (
+          <div className="alert alert-success rounded-0" role="alert">
+            {alert}
+          </div>
+        )}
         <h3 className="text-center">Modification d&apos;une catégorie</h3>
         <form onSubmit={modifierCategorie}>
           <div className="mb-3">
