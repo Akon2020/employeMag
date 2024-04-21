@@ -73,6 +73,17 @@ const Dashboard = () => {
                   <span className="ms-2 d-none d-sm-inline">Profile</span>
                 </Link>
               </li>
+              <li className="w-100">
+                <Link
+                  to={"/admin/dashboard/carteServices"}
+                  className="nav-link text-white px-0 align-middle"
+                >
+                  <i className="fs-4 bi-bank"></i>
+                  <span className="ms-2 d-none d-sm-inline">
+                    Carte de service
+                  </span>
+                </Link>
+              </li>
               <li className="w-100" onClick={Deconnection}>
                 <Link className="nav-link text-white px-0 align-middle">
                   <i className="fs-4 bi-power"></i>

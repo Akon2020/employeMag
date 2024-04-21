@@ -13,6 +13,7 @@ import EditEmploye from "./components/EditEmploye";
 import Start from "./components/Start";
 import AjoutAdmin from "./components/AjoutAdmin";
 import EditCategorie from "./components/EditCategorie";
+import CarteServices from "./components/CarteServices";
 
 function App() {
   return (
@@ -37,13 +38,14 @@ function App() {
             path="/admin/dashboard/edit_employe/:id"
             element={<EditEmploye />}
           />
-          <Route
-            path="/admin/dashboard/ajout_admin"
-            element={<AjoutAdmin />}
-          />
+          <Route path="/admin/dashboard/ajout_admin" element={<AjoutAdmin />} />
           <Route
             path="/admin/dashboard/edit_categorie/:id"
             element={<EditCategorie />}
+          />
+          <Route
+            path="/admin/dashboard/carteServices"
+            element={<CarteServices />}
           />
         </Route>
       </Routes>
